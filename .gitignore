@@ -1,0 +1,25 @@
+# Node modules everywhere
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+
+# Environment files
+**/.env*
+
+# Log files
+**/*.log
+
+# Editor specific files
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Lock files (optional - sometimes better to commit these)
+# **/package-lock.json
+# **/yarn.lock
+**/pnpm-lock.yaml
