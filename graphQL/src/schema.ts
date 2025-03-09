@@ -1,6 +1,6 @@
 const typeDefs = `#graphql
   type Query {
-    hello: String
+    hello: String!
   }
 `;
 

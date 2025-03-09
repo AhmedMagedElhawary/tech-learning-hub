@@ -9,7 +9,6 @@ import zlib from 'zlib';
 import compress from 'koa-compress';
 import typeDefs from './schema';
 import resolvers from './resolvers';
-import type { ApolloServer as ApolloServerType } from '@apollo/server';
 
 // Create HTTP server
 export const httpServer = http.createServer({
@@ -24,7 +23,7 @@ const CORS_OPTIONS = {
 };
 
 // Create Apollo Server
-export const graphqlServer : ApolloServerType= new ApolloServer({
+export const graphqlServer = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,

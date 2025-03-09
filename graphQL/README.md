@@ -2,6 +2,12 @@
 
 A modern GraphQL API server implementation.
 
+The flow is:
+- HTTP request comes into Node.js HTTP server
+- Koa processes it through its middleware stack
+- GraphQL middleware handles GraphQL-specific requests
+- Response flows back through the same path
+
 ## 🛠️ Technologies
 
 - **Apollo Server** - GraphQL server
