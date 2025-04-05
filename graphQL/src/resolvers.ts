@@ -1,6 +1,7 @@
-const resolvers = {
+import { Resolvers } from './generatedModels';
+
+const resolvers: Resolvers = {
   Query: {
-    greeting: () => 'Hello world!',
     job: () => ({
       title: 'Software Engineer',
       description: 'Develop and maintain software applications.',

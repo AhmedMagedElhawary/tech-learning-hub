@@ -3,6 +3,7 @@
 A modern GraphQL API server implementation.
 
 The flow is:
+
 - HTTP request comes into Node.js HTTP server
 - Koa processes it through its middleware stack
 - GraphQL middleware handles GraphQL-specific requests
@@ -25,6 +26,7 @@ pnpm install
 ```
 
 ## 📚 Additional Resources
+
 - [Apollo Server Documentation](https://www.apollographql.com/docs/apollo-server/)
 - [Koa Documentation](https://koajs.com/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)

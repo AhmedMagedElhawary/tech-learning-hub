@@ -9,6 +9,7 @@ import zlib from 'zlib';
 import compress from 'koa-compress';
 import typeDefs from './schema';
 import resolvers from './resolvers';
+import { Context } from './types';
 
 // Create HTTP server
 export const httpServer = http.createServer({
@@ -23,7 +24,7 @@ const CORS_OPTIONS = {
 };
 
 // Create Apollo Server
-export const graphqlServer = new ApolloServer({
+export const graphqlServer = new ApolloServer<Context>({
   typeDefs,
   resolvers,
   introspection: true,
@@ -33,7 +34,6 @@ export const graphqlServer = new ApolloServer({
 // Create GraphQL middleware
 export const graphqlMiddleware = async () => {
   await graphqlServer.start();
-
   const middleware = [
     cors(CORS_OPTIONS),
     compress({
@@ -46,6 +46,5 @@ export const graphqlMiddleware = async () => {
     bodyParser(),
     koaMiddleware(graphqlServer),
   ];
-
   return new Router().all('/graphql', ...middleware).middleware();
 };
