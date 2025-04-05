@@ -1,6 +1,14 @@
 const typeDefs = `#graphql
+  schema {
+    query: Query
+  }
+
   type Query {
-    hello: String!
+    job: Job!
+  }
+  type Job {
+    title: String!
+    description: String!
   }
 `;
 

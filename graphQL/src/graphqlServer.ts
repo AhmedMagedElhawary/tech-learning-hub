@@ -27,15 +27,13 @@ export const graphqlServer = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
-  plugins: [
-    ApolloServerPluginDrainHttpServer({ httpServer }),
-  ],
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
 // Create GraphQL middleware
 export const graphqlMiddleware = async () => {
   await graphqlServer.start();
-  
+
   const middleware = [
     cors(CORS_OPTIONS),
     compress({
@@ -48,8 +46,6 @@ export const graphqlMiddleware = async () => {
     bodyParser(),
     koaMiddleware(graphqlServer),
   ];
-  
-  return new Router()
-    .all('/graphql', ...middleware)
-    .middleware();
+
+  return new Router().all('/graphql', ...middleware).middleware();
 };
