@@ -1,31 +1,23 @@
-import { GraphQLResolveInfo } from 'graphql';
 import { Resolvers } from '../../generatedModels';
-import { Context } from '../../types';
 import { Job } from './types';
 
 export const jobResolvers: Partial<Resolvers> = {
   Query: {
-    job: (): Job => ({
+    job: (): Omit<Job, 'datePosted'> => ({
       id: '1',
       title: 'Software Engineer',
       description: 'Develop and maintain software applications.',
-      // @ts-expect-error Field will be resolved by Job.datePosted
-      datePosted: undefined,
     }),
-    jobs: (): Job[] => [
+    jobs: (): Omit<Job, 'datePosted'>[] => [
       {
         id: '1',
         title: 'Software Engineer',
         description: 'Develop and maintain software applications.',
-        // @ts-expect-error Field will be resolved by Job.datePosted
-        datePosted: undefined,
       },
       {
         id: '2',
         title: 'Product Manager',
         description: 'Lead product development and strategy.',
-        // @ts-expect-error Field will be resolved by Job.datePosted
-        datePosted: undefined,
       },
     ],
   },
