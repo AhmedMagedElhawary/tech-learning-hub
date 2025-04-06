@@ -30,7 +30,6 @@ async function main() {
       if (match && match[1]) {
         const schema = match[1].trim();
         combinedSchema += `\n# From ${file}\n${schema}\n`;
-        console.log(`Extracted schema from ${file}`);
       } else {
         console.warn(`Could not extract schema from ${file}`);
       }
@@ -38,7 +37,6 @@ async function main() {
 
     // Write the combined schema to file
     fs.writeFileSync(outputFile, combinedSchema);
-    console.log(`Combined schema written to ${outputFile}`);
   } catch (error) {
     console.error('Error extracting schema:', error);
     process.exit(1);
