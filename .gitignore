@@ -23,3 +23,7 @@ Thumbs.db
 # **/package-lock.json
 # **/yarn.lock
 **/pnpm-lock.yaml
+
+# Generated GraphQL types
+**/src/generatedModels.ts
+**/schema.graphql

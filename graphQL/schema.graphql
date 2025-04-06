@@ -1,0 +1,11 @@
+
+# From src/modules/job/schema.ts
+#graphql
+  extend type Query {
+    job: Job!
+  }
+
+  type Job {
+    title: String!
+    description: String!
+  }
