@@ -10,6 +10,7 @@
     "format": "prettier --write src/**/*.ts",
     "lint": "eslint src --ext .ts && tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "pregenerate": "node scripts/extract-schema.mjs",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "keywords": [],
@@ -25,6 +26,8 @@
     "@graphql-codegen/cli": "^5.0.5",
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/typescript-resolvers": "^4.5.0",
+    "@graphql-tools/graphql-file-loader": "^8.0.19",
+    "@graphql-tools/load": "^8.0.19",
     "@types/koa": "^2.15.0",
     "@types/koa-bodyparser": "^4.3.12",
     "@types/koa-compress": "^4.0.6",
@@ -33,6 +36,7 @@
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "eslint": "^9.22.0",
+    "glob": "^11.0.1",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
@@ -42,6 +46,8 @@
   "dependencies": {
     "@apollo/server": "^4.11.3",
     "@as-integrations/koa": "^1.1.1",
+    "@graphql-tools/merge": "^9.0.24",
+    "@graphql-tools/schema": "^10.0.23",
     "@koa/cors": "^5.0.0",
     "@koa/router": "^13.1.0",
     "@types/koa-router": "^7.4.8",

@@ -1,5 +1,5 @@
 overwrite: true
-schema: ./src/schema.ts
+schema: ./schema.graphql
 generates:
   ./src/generatedModels.ts:
     plugins:
@@ -8,4 +8,12 @@ generates:
     config:
       contextType: ./types#Context
       # mappers:
-      #   Job: ./types#JobModel
+      #   Job: ./modules/job/types#Job
+      useImplementingTypes: true
+      scalars:
+        String: string
+        Int: number
+        Float: number
+        Boolean: boolean
+        ID: string
+      defaultMapper: unknown

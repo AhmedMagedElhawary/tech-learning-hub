@@ -7,9 +7,8 @@ import cors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import zlib from 'zlib';
 import compress from 'koa-compress';
-import typeDefs from './schema';
-import resolvers from './resolvers';
 import { Context } from './types';
+import schema from '.';
 
 // Create HTTP server
 export const httpServer = http.createServer({
@@ -25,8 +24,7 @@ const CORS_OPTIONS = {
 
 // Create Apollo Server
 export const graphqlServer = new ApolloServer<Context>({
-  typeDefs,
-  resolvers,
+  schema,
   introspection: true,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });

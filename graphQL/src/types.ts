@@ -1,8 +1,8 @@
-export interface Context {
-  // Context properties
+import { Resolvers } from './generatedModels';
+
+export interface GraphQLModule {
+  typeDefs: string;
+  resolvers?: Partial<Resolvers>;
 }
 
-export interface JobModel {
-  title: string;
-  description: string;
-}
+export interface Context {}
