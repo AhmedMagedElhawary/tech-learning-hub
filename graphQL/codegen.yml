@@ -6,14 +6,20 @@ generates:
       - typescript
       - typescript-resolvers
     config:
-      contextType: ./types#Context
-      # mappers:
-      #   Job: ./modules/job/types#Job
+      contextType: ./types#ApolloContext
+      mappers:
+        Job: ./modules/job/resolvers#MappedJob
       useImplementingTypes: true
+      useIndexSignature: true
+      maybeValue: T | null
+      avoidOptionals:
+        field: true
+        object: false
+        inputValue: false
+        defaultValue: true
       scalars:
         String: string
         Int: number
         Float: number
         Boolean: boolean
         ID: string
-      defaultMapper: unknown
