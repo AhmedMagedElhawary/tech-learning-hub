@@ -7,8 +7,9 @@ import cors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import zlib from 'zlib';
 import compress from 'koa-compress';
-import { Context } from './types';
+import { ApolloContext, DataSources } from './types';
 import schema from '.';
+import { JobDataSource } from './dataSource/jobDataSource';
 
 // Create HTTP server
 export const httpServer = http.createServer({
@@ -23,7 +24,7 @@ const CORS_OPTIONS = {
 };
 
 // Create Apollo Server
-export const graphqlServer = new ApolloServer<Context>({
+export const graphqlServer = new ApolloServer<ApolloContext>({
   schema,
   introspection: true,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
@@ -32,6 +33,11 @@ export const graphqlServer = new ApolloServer<Context>({
 // Create GraphQL middleware
 export const graphqlMiddleware = async () => {
   await graphqlServer.start();
+
+  const dataSources: DataSources = {
+    jobDataSource: new JobDataSource(),
+  };
+
   const middleware = [
     cors(CORS_OPTIONS),
     compress({
@@ -42,7 +48,18 @@ export const graphqlMiddleware = async () => {
       },
     }),
     bodyParser(),
-    koaMiddleware(graphqlServer),
+    koaMiddleware(graphqlServer, {
+      context: async ({ ctx }) => {
+        return {
+          request: {
+            ...ctx.request,
+            header: ctx.request.header,
+          },
+          dataSources,
+          state: {},
+        };
+      },
+    }),
   ];
   return new Router().all('/graphql', ...middleware).middleware();
 };

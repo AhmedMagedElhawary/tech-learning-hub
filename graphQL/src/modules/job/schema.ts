@@ -1,9 +1,10 @@
 const jobTypeDefs = `#graphql
+
   extend type Query {
     """
     Get a job by ID.
     """
-    job: Job!
+    job(input: JobInput!): Job
     jobs: [Job!]
   }
 
@@ -15,6 +16,13 @@ const jobTypeDefs = `#graphql
     __Date__.
     """
     datePosted: String!
+  }
+
+  input JobInput {
+    """
+    The identifier for the Job
+    """
+    id: String!
   }
 `;
 
