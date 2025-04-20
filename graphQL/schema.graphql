@@ -1,6 +1,7 @@
 
 # From src/modules/job/schema.ts
 #graphql
+
   extend type Query {
     """
     Get a job by ID.
@@ -24,4 +25,15 @@
     The identifier for the Job
     """
     id: String!
+  }
+
+  type Mutation {
+    """
+    Create a new job.
+    """
+    createJob(input: CreateJobInput!): Job
+  }
+  input CreateJobInput {
+    title: String!
+    description: String
   }

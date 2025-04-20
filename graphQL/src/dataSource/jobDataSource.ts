@@ -1,6 +1,7 @@
 // src/dataSource/jobDataSource.ts
 import { DataSource } from 'apollo-datasource';
 import { MappedJob } from '../modules/job/resolvers';
+import { InputMaybe, Job } from '../generatedModels';
 
 const jobTable: MappedJob[] = [
   {
@@ -18,4 +19,14 @@ export class JobDataSource extends DataSource {
   getAllJobs(): MappedJob[] {
     return jobTable;
   }
+
+  createJob(title: string, description: InputMaybe<string> | undefined): Job {
+    console.log('Creating job with title:', title, 'and description:', description);
+    return {
+      id: (jobTable.length + 1).toString(),
+      title,  
+      description: description || '',
+      datePosted: new Date().toISOString(),   
+    };
+    }
 }
