@@ -32,6 +32,18 @@ export const jobResolvers: Resolvers = {
       }
     },
   },
+
+  Mutation: {
+    createJob: (_parent, { input }, { dataSources,  request}) => {
+      // TODO: Implement authentication and authorization logic
+      console.log('authorization', request.header.authorization);
+      const job = dataSources.jobDataSource.createJob(input.title, input.description);
+      if (!job) {
+        throw badRequestError('Failed to create job');
+      }
+      return job;
+    },
+  },
 };
 
 export type MappedJob = Omit<Job, 'datePosted'>;
@@ -46,3 +58,15 @@ const notFoundError = (message: string) => {
     },
   });
 };
+
+const badRequestError = (message: string) => {
+  return new GraphQLError(message, {
+    extensions: {
+      code: 'BAD_REQUEST',
+      http: {
+        status: 400,
+      },
+    },
+  });
+};
+

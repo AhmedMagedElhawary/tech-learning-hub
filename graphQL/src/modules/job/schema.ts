@@ -24,6 +24,17 @@ const jobTypeDefs = `#graphql
     """
     id: String!
   }
+
+  type Mutation {
+    """
+    Create a new job.
+    """
+    createJob(input: CreateJobInput!): Job
+  }
+  input CreateJobInput {
+    title: String!
+    description: String
+  }
 `;
 
 export default jobTypeDefs;
